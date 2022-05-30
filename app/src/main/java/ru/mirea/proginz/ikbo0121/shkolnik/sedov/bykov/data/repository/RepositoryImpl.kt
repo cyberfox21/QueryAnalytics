@@ -3,9 +3,8 @@ package ru.mirea.proginz.ikbo0121.shkolnik.sedov.bykov.data.repository
 import io.reactivex.Single
 import ru.mirea.proginz.ikbo0121.shkolnik.sedov.bykov.data.api.NetworkService
 import ru.mirea.proginz.ikbo0121.shkolnik.sedov.bykov.data.entity.FullInfoDto
-import ru.mirea.proginz.ikbo0121.shkolnik.sedov.bykov.data.entity.GraphPoint
+import ru.mirea.proginz.ikbo0121.shkolnik.sedov.bykov.data.entity.GraphPointDto
 import ru.mirea.proginz.ikbo0121.shkolnik.sedov.bykov.data.entity.InfoDto
-import ru.mirea.proginz.ikbo0121.shkolnik.sedov.bykov.data.entity.InterestHistory
 import ru.mirea.proginz.ikbo0121.shkolnik.sedov.bykov.domain.repository.Repository
 import javax.inject.Inject
 
@@ -23,7 +22,7 @@ class RepositoryImpl @Inject constructor(
     override fun getInterestHistoryByTheRegion(
         region: String,
         keyword: String
-    ): Single<List<GraphPoint>> {
+    ): Single<List<GraphPointDto>> {
         return networkService.getInterestHistoryByTheRegion(
             region = region,
             keyword = keyword

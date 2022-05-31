@@ -7,6 +7,7 @@
 
     <string name="search">Search</string>
     <string name="query">Query</string>
+    <string name="period">Period</string>
 
     <string name="popular">Popular</string>
     <string name="region">Region</string>
@@ -16,4 +17,13 @@
     <string name="add">Add</string>
     <string name="delete">Delete</string>
     <string name="no_information">No information</string>
+
+    <string name="last_5_years">Last 5 years</string>
+    <string name="last_year">Last year</string>
+    <string name="last_3_months">Last 3 months</string>
+    <string name="last_month">Last month</string>
+    <string name="last_week">Last week</string>
+    <string name="last_day">Last day</string>
+    <string name="last_4_hours">Last 4 hours</string>
+    <string name="last_hour">Last hour</string>
 </resources>

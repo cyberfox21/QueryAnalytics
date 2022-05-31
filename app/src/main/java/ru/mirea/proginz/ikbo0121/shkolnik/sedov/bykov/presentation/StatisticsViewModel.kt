@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ru.mirea.proginz.ikbo0121.shkolnik.sedov.bykov.ui.adapters.tools.DelegateItem
+import ru.mirea.proginz.ikbo0121.shkolnik.sedov.bykov.ui.enums.Period
+import ru.mirea.proginz.ikbo0121.shkolnik.sedov.bykov.ui.enums.Period.LAST_5_YEARS
 import ru.mirea.proginz.ikbo0121.shkolnik.sedov.bykov.ui.models.ChartUi
 import ru.mirea.proginz.ikbo0121.shkolnik.sedov.bykov.ui.models.InfoUi
 
@@ -18,9 +20,13 @@ class StatisticsViewModel : ViewModel() {
     private val _region = MutableLiveData<String>()
     val region: LiveData<String> = _region
 
-    fun init(initQuery: String?, initRegion: String?) {
+    private val _period = MutableLiveData<Period>()
+    val period: LiveData<Period> = _period
+
+    fun init(initQuery: String?, initRegion: String?, initPeriod: Period = LAST_5_YEARS) {
         if (query.value == null) initQuery?.let { _query.value = it }
         if (region.value == null) initRegion?.let { _region.value = it }
+        if (period.value == null) _period.value = initPeriod
     }
 
     fun loadData() {

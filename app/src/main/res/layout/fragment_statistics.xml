@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/menu_statistics"
         app:navigationIcon="@drawable/ic_back"
         app:navigationIconTint="?attr/colorPrimary"
         app:title="@string/statistics" />

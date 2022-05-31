@@ -2,6 +2,7 @@ package ru.mirea.proginz.ikbo0121.shkolnik.sedov.bykov.ui.fragments
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isGone
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -21,10 +22,15 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.items.observe(viewLifecycleOwner) { adapter.submitList(it) }
         binding.buttonSearch.setOnClickListener { openStatistics() }
+
         binding.listDashboard.adapter = adapter.apply {
             addDelegate(TrendAdapterDelegate { query, region -> openStatistics(query, region) })
+        }
+
+        viewModel.items.observe(viewLifecycleOwner) { items ->
+            binding.viewEmpty.root.isGone = items.isNotEmpty()
+            adapter.submitList(items)
         }
     }
 

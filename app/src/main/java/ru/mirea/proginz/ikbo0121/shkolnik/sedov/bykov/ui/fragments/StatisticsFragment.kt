@@ -2,6 +2,7 @@ package ru.mirea.proginz.ikbo0121.shkolnik.sedov.bykov.ui.fragments
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isGone
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
@@ -24,7 +25,12 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
         super.onViewCreated(view, savedInstanceState)
         binding.toolbar.setNavigationOnClickListener { activity?.onBackPressed() }
 
-        viewModel.items.observe(viewLifecycleOwner) { adapter.submitList(it) }
+        binding.viewSearch.searchButton.setOnClickListener { viewModel.loadData() }
+        binding.listStatistics.adapter = adapter.apply {
+            addDelegate(InfoAdapterDelegate { viewModel.onInfoClicked(it) })
+            addDelegate(ChartAdapterDelegate())
+        }
+
         viewModel.query.observe(viewLifecycleOwner) { query ->
             with(binding.viewSearch.queryView.query) {
                 setText(query)
@@ -36,10 +42,9 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
             binding.viewSearch.queryView.region.setText(region)
         }
 
-        binding.viewSearch.searchButton.setOnClickListener { viewModel.loadData() }
-        binding.listStatistics.adapter = adapter.apply {
-            addDelegate(InfoAdapterDelegate { viewModel.onInfoClicked(it) })
-            addDelegate(ChartAdapterDelegate())
+        viewModel.items.observe(viewLifecycleOwner) { items ->
+            binding.viewEmpty.root.isGone = items.isNotEmpty()
+            adapter.submitList(items)
         }
 
         viewModel.init(args.query, args.region)
